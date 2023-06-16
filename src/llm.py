@@ -49,12 +49,11 @@ class GPTAgent:
             )
             return response
         except Exception as e:
-            return e
+            raise e
 
     def run(self):
         # Step 1, send model the user query and what functions it has access to
         response = self._generate()
-        print(response)
         message = response["choices"][0]["message"]
         self.session.add_message(message)
 
