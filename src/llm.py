@@ -7,7 +7,7 @@ import openai
 
 import config
 from tenacity import retry, wait_random_exponential, stop_after_attempt
-from enums import Role
+from utils.enums import Role
 from session import Session
 from base import ToolModel
 

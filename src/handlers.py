@@ -1,6 +1,7 @@
-from enums import Role
+from utils.enums import Role
 from base import Observer
 from termcolor import colored
+
 
 class Shell(Observer):
 
@@ -11,20 +12,21 @@ class Shell(Observer):
         "function": "magenta",
     }
 
-    def handle(self, message: dict):
-        role = Role(message["role"])
+    def handle(self, message: dict, role: Role):
         if role is Role.SYSTEM:
-            formatted_message = f"system: {message['content']}\n"
+            formatted_message = f"[system]: {message['content']}"
         elif role is Role.USER:
-            formatted_message = f"user: {message['content']}\n"
+            formatted_message = f"[user]: {message['content']}"
         elif role is Role.ASSISTANT and message.get("function_call"):
             func_call = message['function_call']
-            formatted_message = f"assistant ({func_call['name']}): {func_call['arguments']}\n"
+            formatted_message = f"[assistant] ({func_call['name']}): {func_call['arguments']}"
         elif role is Role.ASSISTANT and not message.get("function_call"):
-            formatted_message = f"assistant: {message['content']}\n"
+            formatted_message = f"[assistant]: {message['content']}"
         elif role is Role.FUNCTION:
-            content = message['content'][:100].replace('\n', ' ') + '...'
-            formatted_message = f"function ({message['name']}): {content}\n"
+            content = message['content'][:100].replace(' ', '') + '...'
+            formatted_message = f"[function] ({message['name']}): {content}"
+        elif role is None:
+            formatted_message = f'异常message: {message}'
         else:
             formatted_message = f'异常message: {message}'
         print(

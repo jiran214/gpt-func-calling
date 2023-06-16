@@ -58,14 +58,24 @@ pip install -r .\requirements.txt
 ### 工具列表
 - 百度百科
   <div align=center>
-    <img src="https://github.com/jiran214/gpt-func-calling/blob/main/public/img.png" width="800" height="300"/><br/>
+    <img src="https://github.com/jiran214/gpt-func-calling/blob/main/public/img.png" width="900" height="200"/><br/>
   </div>
+- 网易新闻 
+- 百度百科 
+- csdn 
+- 掘金 
+- 谷歌
 - 正在开发中...
+
 ## 更新日志
 ## to do list
-- [ ] playwright 引入
+- [ ] playwright 引入，简化爬虫
+- [ ] 工具输出的内容长度自由选择
+- [ ] 对工具输出做summary
+- [ ] 交互式对话，保留一定窗口大小
+- [ ] 前端界面
 ## Contact Me
 - 请先star本项目~~
 - **如果你遇到各种问题，请提issues，一般的问题不要加我，感谢理解！**
-- 欢迎加我WX：yuchen59384 交流！
+- 如果你有好的建议和想法，欢迎加我WX：yuchen59384 交流！
 

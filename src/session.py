@@ -1,4 +1,5 @@
 from base import ObservableMixin
+from utils.enums import Role
 
 
 class Session(ObservableMixin):
@@ -11,6 +12,10 @@ class Session(ObservableMixin):
     def from_memory(cls):
         ...
 
-    def add_message(self, message: dict):
+    def add_message(self, message: dict, *arg, **kwargs):
         self.message_list.append(message)
-        self.notify(message)
+        role = Role(message["role"])
+        self.notify(message, role, *arg, **kwargs)
+
+    def add_extra_message(self, message: dict, *arg, **kwargs):
+        self.notify(message, None, *arg, **kwargs)

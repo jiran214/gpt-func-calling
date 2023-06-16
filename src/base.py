@@ -67,9 +67,9 @@ class ObservableMixin(ABC):
     def add_handler(self, observer):
         self.observer_list.append(observer)
 
-    def notify(self, *args):
+    def notify(self, *args, **kwargs):
         for observer in self.observer_list:
-            observer.handle(*args)
+            observer.handle(*args, **kwargs)
 
 
 class Observer(ABC):

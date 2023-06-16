@@ -9,3 +9,5 @@ _config.read(_file_path)
 
 api_key = _config.get('openai', 'api_key')
 proxy = _config.get('openai', 'proxy')
+cookie_settings = dict(_config.items('tool_cookie'))
+google_settings = dict(_config.items('google'))
