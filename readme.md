@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/license-GPL-blue)
 
 ## 简介
-利用ChatGPT最新的function-calling，实现类似LangChain Agent代理功能
+利用ChatGPT最新的function-calling，实现类似LangChain Agent代理功能，通过tool补充上下文
 
 ## 安装
 ### 环境
@@ -22,7 +22,7 @@ pip install -r .\requirements.txt
 - src目录下重命名config.sample.ini为config.ini
 - 更改api_key和proxy
 ## 快速开始
-- > `cd src`
+- 运行 >> `cd src`
 - 修改 main.py 内容
   ```python 
   
@@ -53,12 +53,12 @@ pip install -r .\requirements.txt
   agent.run()
 
   ```
-- > `python main.py`
+- 运行 >> `python main.py`
 
 ### 工具列表
 - 百度百科
   <div align=center>
-    <img src="https://github.com/jiran214/gpt-func-calling/blob/main/public/img.png" width="400" height="200"/><br/>
+    <img src="https://github.com/jiran214/gpt-func-calling/blob/main/public/img.png" width="800" height="300"/><br/>
   </div>
 - 正在开发中...
 ## 更新日志
