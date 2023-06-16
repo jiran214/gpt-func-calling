@@ -7,17 +7,22 @@ from config import google_settings
 from utils.string_process import filter_html
 
 
+headers = {
+    'User-Agent': """Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.43""",
+}
+
+
 class WangYiNews(ToolModel):
     search_input: str = Field(description='网易新闻内容搜索输入')
 
     def use(self):
         url = f"""https://www.163.com/search?keyword={self.search_input}"""
-        r = requests.get(url)
+        r = requests.get(url, headers=headers)
         sl = Selector(text=r.text)
         next_url = sl.xpath("""//div[@class="keyword_list "]/div[1]//div[@class="keyword_img"]/a/@href""").get()
         if not next_url:
             return '未找到相关结果'
-        r = requests.get(url)
+        r = requests.get(next_url, headers=headers)
         sl = Selector(text=r.text)
         test_list = sl.xpath("""//div[@class="post_body"]//text()""").getall()
         return filter_html(test_list)

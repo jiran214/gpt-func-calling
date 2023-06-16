@@ -31,7 +31,7 @@ agent = GPTAgent.from_tools(
 # 创建消息
 message = {
     'role': Role.USER.value,
-    'content': '蔡徐坤是谁'  # 在这输入第一个问题
+    'content': '谷歌上搜索中国历史'  # 在这输入第一个问题
 }
 # 添加到会话窗口
 session.add_message(message)

@@ -18,8 +18,9 @@ class Shell(Observer):
         elif role is Role.USER:
             formatted_message = f"[user]: {message['content']}"
         elif role is Role.ASSISTANT and message.get("function_call"):
+            # "判断用工具可用
             func_call = message['function_call']
-            formatted_message = f"[assistant] ({func_call['name']}): {func_call['arguments']}"
+            formatted_message = f"[assistant] ({func_call['name']}): {str(func_call['arguments'])}"
         elif role is Role.ASSISTANT and not message.get("function_call"):
             formatted_message = f"[assistant]: {message['content']}"
         elif role is Role.FUNCTION:
