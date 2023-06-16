@@ -1,0 +1,22 @@
+git commit -m "first commit"# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# IDEs and editors
+.idea/
+*.swp
+*~.nfs*
+*.bak
+*.cache
+*.dat
+*.db
+*.log
+*.patch
+*.orig.*
+*.rej.*
+*.tmp.*
+
+*.mp3
+*.wav
+
+env/
+config.ini
