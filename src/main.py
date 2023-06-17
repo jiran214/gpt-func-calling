@@ -1,8 +1,8 @@
 from utils.enums import Role
 from handlers import Shell
 from llm import GPTAgent
-from session import Session
-from src.tools import (
+from sessions import Session, InteractiveSession
+from tools import (
     WangYiNews,
     BaiduBaike,
     CSDN,
@@ -12,7 +12,7 @@ from src.tools import (
 )
 
 # 新建会话窗口
-session = Session()
+session = InteractiveSession()
 # 添加输出终端
 session.add_handler(Shell())
 # 初始化工具
@@ -30,12 +30,7 @@ agent = GPTAgent.from_tools(
     tools=tools,
     session=session
 )
-# 创建消息
-message = {
-    'role': Role.USER.value,
-    'content': 'bing上搜索人工智能是什么?'  # 在这输入第一个问题
-}
 # 添加到会话窗口
-session.add_message(message)
+session.get_input()
 # 启动代理
-agent.run()
+agent.forever_run()

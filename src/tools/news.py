@@ -3,7 +3,6 @@ from parsel import Selector
 from pydantic import Field
 
 from base import ToolModel
-from config import google_settings
 from moudles import session
 from utils.string_process import filter_html
 

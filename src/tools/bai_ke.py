@@ -3,6 +3,7 @@ import requests
 from parsel import Selector
 from pydantic import Field
 
+from moudles import session
 from utils.string_process import filter_html
 from base import ToolModel
 
@@ -23,14 +24,14 @@ class BaiduBaike(ToolModel):
 
     def use(self):
         url = f"https://baike.baidu.com/api/searchui/suggest?wd={self.search_input}&enc=utf8"
-        r = requests.get(url)
+        r = session.get(url)
         data_list = r.json()['list']
         if not data_list:
             return '未找到相关结果'
         lemma_title = data_list[0]['lemmaTitle']
         lemma_id = data_list[0]['lemmaId']
         new_url = f"https://baike.baidu.com/item/{lemma_title}/{lemma_id}"
-        r = requests.get(new_url, headers=headers)
+        r = session.get(new_url, headers=headers)
         sl = Selector(text=r.text)
         text_list = sl.xpath("""//div[@class='main-content J-content']//text()""").getall()
         if not data_list:
@@ -39,6 +40,6 @@ class BaiduBaike(ToolModel):
 
     class Meta:
         name = "get_baidu_baike_info"
-        description = "获取百度百科信息"
+        description = "百度百科是一部内容开放、自由的网络百科全书，旨在创造一个涵盖所有领域知识，服务所有互联网用户的中文知识性百科全书。"
 
 

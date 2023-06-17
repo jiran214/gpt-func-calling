@@ -24,7 +24,7 @@ class Shell(Observer):
         elif role is Role.ASSISTANT and not message.get("function_call"):
             formatted_message = f"[assistant]: {message['content']}"
         elif role is Role.FUNCTION:
-            content = message['content'][:100].replace(' ', '') + '...'
+            content = message['content'][:200].replace(' ', '') + '...'
             formatted_message = f"[function] ({message['name']}): {content}"
         elif role is None:
             formatted_message = f'异常message: {message}'

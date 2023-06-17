@@ -54,9 +54,8 @@ class ToolModel(BaseModel, ABC):
         return schema
 
     class Meta:
-        function = None
-        name = ""
-        description = ""
+        name = ""  # 工具名称
+        description = ""  # 工具描述
 
 
 class ObservableMixin(ABC):

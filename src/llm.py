@@ -1,18 +1,18 @@
 import json
 import os
+import signal
+import sys
 
 from typing import Iterable, Dict, List, Type
 
 import openai
-import requests
-from openai import api_requestor
+from termcolor import colored
 
 import config
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 
-from moudles import session
 from utils.enums import Role
-from session import Session
+from sessions import Session
 from base import ToolModel
 
 openai.api_key = config.api_key
@@ -83,3 +83,23 @@ class GPTAgent:
             self.session.add_message(message)
             second_response = self._generate()
             self.session.add_message(second_response["choices"][0]["message"])
+
+            self.session.clear()
+
+    def forever_run(self):
+        def sig_handler(signum, frame):
+            is_exit = True
+            sys.exit(0)
+
+        signal.signal(signal.SIGINT, sig_handler)
+        signal.signal(signal.SIGTERM, sig_handler)
+        try:
+            while 1:
+                self.run()
+                if callback := getattr(self.session, 'get_input', None):
+                    callback()
+        except KeyboardInterrupt as e:
+            print(colored('goodbye', 'yellow', force_color=True))
+
+
+
