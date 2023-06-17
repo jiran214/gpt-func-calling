@@ -1,5 +1,6 @@
+import config
 from utils.enums import Role
-from handlers import Shell
+from handlers import Shell, SlidingWindowHandler
 from llm import GPTAgent
 from sessions import Session, InteractiveSession
 from tools import (
@@ -15,6 +16,8 @@ from tools import (
 session = InteractiveSession()
 # 添加输出终端
 session.add_handler(Shell())
+if config.window_size:
+    session.add_handler(SlidingWindowHandler())
 # 初始化工具
 tools = [
     WangYiNews,  # 网易新闻

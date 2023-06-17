@@ -1,10 +1,11 @@
+
 from termcolor import colored
 
-from base import ObservableMixin
+from base import Observable
 from utils.enums import Role
 
 
-class Session(ObservableMixin):
+class Session(Observable):
 
     def __init__(self):
         super().__init__()
@@ -16,13 +17,14 @@ class Session(ObservableMixin):
     def add_message(self, message: dict, *arg, **kwargs):
         self.message_list.append(message)
         role = Role(message["role"])
-        self.notify(message, role, *arg, **kwargs)
+        self.notify(self, message, role, *arg, **kwargs)
 
     def add_extra_message(self, message: dict, *arg, **kwargs):
-        self.notify(message, None, *arg, **kwargs)
+        self.notify(self, message, None, *arg, **kwargs)
 
 
-class InteractiveSession(Session):
+class InteractiveMixin:
+    """交互式"""
 
     def get_input(self):
         message = {
@@ -31,10 +33,17 @@ class InteractiveSession(Session):
                 colored('\n请输入prompt: ', 'green', force_color=True)
             )  # 在这输入第一个问题
         }
-        return self.add_message(message)
+        getattr(self, 'add_message')(message)
 
 
-class MemorySession(Session):
+class InteractiveSession(Session, InteractiveMixin):
+    """交互式Session"""
+
+    pass
+
+
+class MemoryMixin:
+    """记忆混入"""
 
     @classmethod
     def from_memory(cls):
@@ -42,3 +51,4 @@ class MemorySession(Session):
 
     def save_memory(self):
         ...
+

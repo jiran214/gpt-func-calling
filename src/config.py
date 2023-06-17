@@ -14,3 +14,5 @@ proxies = {
     'https': f'http://{proxy}/'
 }
 google_settings = dict(_config.items('google'))
+window_size = _config.getint('session', 'window_size')
+tool_output_limit = _config.getint('tool', 'output_limit')

@@ -12,7 +12,7 @@ import config
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 
 from utils.enums import Role
-from sessions import Session
+from sessions import Session, InteractiveMixin
 from base import ToolModel
 
 openai.api_key = config.api_key
@@ -96,8 +96,8 @@ class GPTAgent:
         try:
             while 1:
                 self.run()
-                if callback := getattr(self.session, 'get_input', None):
-                    callback()
+                if isinstance(self.session, InteractiveMixin):
+                    self.session.get_input()
         except KeyboardInterrupt as e:
             print(colored('goodbye', 'yellow', force_color=True))
 

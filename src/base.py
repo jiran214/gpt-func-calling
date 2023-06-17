@@ -58,7 +58,7 @@ class ToolModel(BaseModel, ABC):
         description = ""  # 工具描述
 
 
-class ObservableMixin(ABC):
+class Observable(ABC):
 
     def __init__(self):
         self.observer_list = []

@@ -56,10 +56,10 @@ async def browser_coroutine():
 
         if item == 'over':
             await browser.close()
-        elif len(item) == 2:
-            url, callback = item
+        else:
+            url, store = item
             content = await browser.goto(url)
-            callback(content)
+            setattr(store, str(hash(url)), content)
         _browser_queue.task_done()
 
 
@@ -75,19 +75,27 @@ if False:
     _browser_thread.start()
 
 
+class Store:
+    ...
+
+
 class PlaywrightOperate:
 
     @staticmethod
-    def put_task(url: str, callback: Callable):
-        _browser_queue.put((url, callback))
+    def put_task(url: str):
+        _browser_queue.put((url, Store))
 
     @staticmethod
     def end():
         _browser_queue.put('over')
 
     @staticmethod
-    def wait():
+    def wait(url):
+        store_key = str(hash(url))
         _browser_queue.join()
+        content = getattr(Store, store_key)
+        delattr(Store, store_key)
+        return content
 
 
 
