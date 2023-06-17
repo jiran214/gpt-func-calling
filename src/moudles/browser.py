@@ -69,7 +69,8 @@ def run_coroutine_in_thread():
     loop.run_until_complete(browser_coroutine())
 
 
-if 1:
+# todo 暂时不启用，等tool manager完成,管理不同工具的依赖
+if False:
     _browser_thread = threading.Thread(target=run_coroutine_in_thread)
     _browser_thread.start()
 
