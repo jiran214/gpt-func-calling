@@ -65,11 +65,12 @@ pip install -r .\requirements.txt
 - csdn 
 - 掘金 
 - 谷歌
+- Bing
 - 正在开发中...
 
 ## 更新日志
 ## to do list
-- [ ] playwright 引入，简化爬虫
+- [x] playwright 引入，简化爬虫
 - [ ] 工具输出的内容长度自由选择
 - [ ] 对工具输出做summary
 - [ ] 交互式对话，保留一定窗口大小

@@ -4,16 +4,22 @@ import os
 from typing import Iterable, Dict, List, Type
 
 import openai
+import requests
+from openai import api_requestor
 
 import config
 from tenacity import retry, wait_random_exponential, stop_after_attempt
+
+from moudles import session
 from utils.enums import Role
 from session import Session
 from base import ToolModel
 
 openai.api_key = config.api_key
-os.environ["http_proxy"] = f'http://{config.proxy}/'
-os.environ["https_proxy"] = f'http://{config.proxy}/'
+openai.proxy = config.proxies
+
+# os.environ["http_proxy"] = f'http://{config.proxy}/'
+# os.environ["https_proxy"] = f'http://{config.proxy}/'
 
 
 class GPTAgent:

@@ -8,6 +8,7 @@ from src.tools import (
     CSDN,
     JueJin,
     GoogleSearch,
+    BingSearch,
 )
 
 # 新建会话窗口
@@ -21,6 +22,7 @@ tools = [
     CSDN,  # csdn
     JueJin,  # 掘金
     GoogleSearch,  # 谷歌 需要在config.ini -> google 配置api，详见 https://zhuanlan.zhihu.com/p/174666017
+    BingSearch,  # Bing
     # 持续开发中...
 ]
 # 创建代理
@@ -31,7 +33,7 @@ agent = GPTAgent.from_tools(
 # 创建消息
 message = {
     'role': Role.USER.value,
-    'content': '谷歌上搜索中国历史'  # 在这输入第一个问题
+    'content': 'bing上搜索人工智能是什么?'  # 在这输入第一个问题
 }
 # 添加到会话窗口
 session.add_message(message)

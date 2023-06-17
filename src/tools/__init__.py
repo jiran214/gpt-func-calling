@@ -1,7 +1,7 @@
 from tools.bai_ke import BaiduBaike
 from tools.news import WangYiNews
 from tools.program import JueJin, CSDN
-from tools.search_engine import GoogleSearch
+from tools.search_engine import GoogleSearch, BingSearch
 
 __all__ = [
     'WangYiNews',
@@ -9,4 +9,5 @@ __all__ = [
     'CSDN',
     'JueJin',
     'GoogleSearch',
+    'BingSearch',
 ]

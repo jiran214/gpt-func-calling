@@ -4,6 +4,7 @@ from pydantic import Field
 
 from base import ToolModel
 from config import google_settings
+from moudles import session
 from utils.string_process import filter_html
 
 
@@ -17,12 +18,12 @@ class WangYiNews(ToolModel):
 
     def use(self):
         url = f"""https://www.163.com/search?keyword={self.search_input}"""
-        r = requests.get(url, headers=headers)
+        r = session.get(url, headers=headers)
         sl = Selector(text=r.text)
         next_url = sl.xpath("""//div[@class="keyword_list "]/div[1]//div[@class="keyword_img"]/a/@href""").get()
         if not next_url:
             return '未找到相关结果'
-        r = requests.get(next_url, headers=headers)
+        r = session.get(next_url, headers=headers)
         sl = Selector(text=r.text)
         test_list = sl.xpath("""//div[@class="post_body"]//text()""").getall()
         return filter_html(test_list)

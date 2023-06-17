@@ -8,10 +8,6 @@ class Session(ObservableMixin):
         super().__init__()
         self.message_list = []
 
-    @classmethod
-    def from_memory(cls):
-        ...
-
     def add_message(self, message: dict, *arg, **kwargs):
         self.message_list.append(message)
         role = Role(message["role"])
@@ -19,3 +15,13 @@ class Session(ObservableMixin):
 
     def add_extra_message(self, message: dict, *arg, **kwargs):
         self.notify(message, None, *arg, **kwargs)
+
+
+class MemorySession(Session):
+
+    @classmethod
+    def from_memory(cls):
+        ...
+
+    def save_memory(self):
+        ...
